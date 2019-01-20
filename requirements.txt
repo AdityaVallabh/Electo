@@ -1,13 +1,13 @@
 defusedxml==0.5.0
 diff-match-patch==20181111
-Django==2.1.4
+Django==2.1.5
 django-import-export==1.1.0
 et-xmlfile==1.0.1
 jdcal==1.4
 odfpy==1.4.0
 openpyxl==2.5.12
 pytz==2018.7
-PyYAML==3.13
+PyYAML==4.2b1
 tablib==0.12.1
 unicodecsv==0.14.1
 xlrd==1.1.0
