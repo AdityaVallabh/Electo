@@ -1,0 +1,60 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Thank You!</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  
+      <link rel="stylesheet" href="{% static 'css/thanks.css' %}">
+
+  
+</head>
+
+<body>
+  <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+  
+<div id="hello-dribbble">  
+  <input type="checkbox" id="button" name="button" />
+  <h1>Successfully Voted!</h1>
+  <h2>Thank you</h2>  
+  <div class="card-wrapper">
+    <div class="card"></div>
+  </div>
+  
+  <div class="box">      
+    <div class="dribbble-logo"></div> 
+     <label class="button" for="button" onclick="DelayRedirect()" id="button1">logout</label>
+
+<br />
+<br />
+
+<script type="text/javascript">
+function DelayRedirect() {
+    seconds2 -= .5;
+    var seconds = 2;
+    setInterval(function () {
+        if (seconds == 0) {
+            window.location = "/";
+        }
+        seconds--;
+    }, 1000);
+}
+
+var seconds2 = 5;
+setInterval(function () {
+    if (seconds2 == 0) {
+        document.getElementById('button1').click();
+    }
+    seconds2--;
+}, 1000);
+
+</script>
+  </div>
+</div>
+
+  
+</body>
+</html>

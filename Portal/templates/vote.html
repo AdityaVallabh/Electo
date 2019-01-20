@@ -1,0 +1,95 @@
+
+{% if request.user.is_superuser %}
+	<script>window.location.replace('/admin')</script>
+{% else %}
+{% load staticfiles %}
+	<!DOCTYPE html>
+	<html >
+	<head>
+		<meta charset="UTF-8">
+		<title>Elections Portal</title>  
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+		<style>
+			{% if Portal.0.post.type == 'House' %}
+  			tr:hover td {
+  				   		{% if request.user.house == 'SOL' %}
+  				   		    background-color: rgba(147,112,219,0.5)
+                        {% elif request.user.house == 'SURYAS' %}
+  				   			background-color: rgba(255,255,0,0.5);
+  				   		{% elif request.user.house == 'HELIOS' %}
+  				   			background-color: rgba(0,255,0,0.5);
+  				   		{% elif request.user.house == 'MITHRAS' %}
+  				   			background-color: rgba(0,0,255,0.5);
+  				   		{% elif request.user.house == 'AMON RE' %}
+  				   			background-color: rgba(255,0,0,0.5);
+                        {% endif %}
+			}
+			{% endif %}
+		</style>
+
+
+	</head>
+
+	<body>
+		<html lang="en">
+		<head>
+			<meta charset="utf-8" />
+			<title>Table Style</title>
+			<meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+		</head>
+
+		<body>			
+
+			<h5 style="text-align: right">
+                Name: {{ request.user.name }} <br>
+                Class: {{ request.user.class_sec }} <br>
+                House: {{ request.user.house }} <br>
+			</h5>
+
+			<div class="table-title">
+				<h3>{{ request.user.stage }}</h3>
+			</div>
+
+			<script type="text/javascript">
+				function selectRow(row)
+				{
+					var firstInput = row.getElementsByTagName('input')[0];
+					firstInput.checked = 1;
+				}
+			</script>
+
+			<div class="form">
+				<form id={{ request.user.stage }} method="POST">
+                {% csrf_token %}
+					<table class="table-fill">
+						<thead>
+							<tr>
+								<th class="text-left">Name</th>
+								<th class="text-left">Symbol</th>
+								<th class="text-left">Selection</th>
+							</tr>
+						</thead>
+						<tbody class="table-hover">
+                        {% if nominees %}
+                        {% for nominee in nominees %}
+                                <tr onclick="selectRow(this)">
+									<td>{{ nominee.name }}</td>
+									<td> <img src="{% static nominee.symbol %}" height="95" width="95"/></td>
+									<td>
+										<label><input type="radio" name="optradio" value="{{ nominee.name }}"></label>
+									</td>
+								</tr>
+						{% endfor %}
+                        {% else %}
+                            No nominees found :(
+                        {% endif %}
+					</tbody>
+				</table>
+				<div id="buttons">
+					<input class="btn blue" type="submit" name="submit" value="Vote"/>
+				</div>
+			</form>
+		</div>
+	</body>
+	</html>
+{% endif %}
