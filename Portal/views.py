@@ -14,7 +14,7 @@ def get_nominee_list(user):
     return nominees
 
 def get_next_stage(user, post):
-    if user.house == 'None':
+    if user.house == 'NONE':
         limit = Post.objects.filter(type='General').count()
     else:
         limit = Post.objects.all().count()
@@ -40,8 +40,11 @@ def vote_view(request):
     elif request.method == 'POST':
         if request.POST.get('submit') and request.POST.get('optradio'):
             nominee = Nominee.objects.get(name=request.POST.get('optradio'))
-            assert user.stage == nominee.post.name
-            assert nominee.house == user.house or nominee.house == 'NONE'
+            if user.stage != nominee.post.name:
+                print('{} is at {} but tried voting for {}'.format(user.name, user.stage, nominee.name))
+                return redirect('/elections')
+            error_message = "Your house ({}) doesn't match the nominee's house ({})".format(user.house, nominee.house)
+            assert nominee.house == user.house or nominee.house == 'NONE', error_message
             user.stage = get_next_stage(user, nominee.post)
             nominee.votes += 1
             nominee.save()

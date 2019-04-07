@@ -47,7 +47,7 @@ Django-based Election Portal
 - Run the application
 
     ```cmd
-    python manage.py runserver 80
+    python manage.py runserver 0.0.0.0:80
     ```
 
 Your Election Portal is now up and running!

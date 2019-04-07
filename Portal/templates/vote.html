@@ -10,7 +10,7 @@
 		<title>Elections Portal</title>  
 		<link rel="stylesheet" href="{% static 'css/style.css' %}">
 		<style>
-			{% if Portal.0.post.type == 'House' %}
+			{% if nominees.0.post.type == 'House' %}
   			tr:hover td {
   				   		{% if request.user.house == 'SOL' %}
   				   		    background-color: rgba(147,112,219,0.5)
